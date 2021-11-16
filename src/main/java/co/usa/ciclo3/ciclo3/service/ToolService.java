@@ -41,4 +41,38 @@ public class ToolService {
             }
         }
     }
+
+    public Tool update(Tool t) {
+        if (t.getId() != null) {
+            Optional<Tool> mAux = toolRepository.getTool(t.getId());
+            if (!mAux.isEmpty()) {
+                if (t.getBrand() != null) {
+                    mAux.get().setBrand(t.getBrand());
+                }
+                if (t.getName() != null) {
+                    mAux.get().setName(t.getName());
+                }
+                if (t.getDescription() != null) {
+                    mAux.get().setDescription(t.getDescription());
+                }
+                if (t.getYear() != null) {
+                    mAux.get().setYear(t.getYear());
+                }
+                toolRepository.save(mAux.get());
+                return mAux.get();
+            } else {
+                return t;
+            }
+        } else {
+            return t;
+        }
+    }
+
+    public boolean delete(int toolId) {
+        Boolean mAux = getTool(toolId).map(tool -> {
+            toolRepository.delete(tool);
+            return true;
+        }).orElse(false);
+        return mAux;
+    }
 }

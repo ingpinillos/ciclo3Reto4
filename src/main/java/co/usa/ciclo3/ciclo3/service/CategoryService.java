@@ -28,17 +28,41 @@ public class CategoryService {
         return categoryRepository.getCategory(id);
     }
 
-    public Category save(Category t) {
-        if (t.getId() == null) {
-            return categoryRepository.save(t);
+    public Category save(Category c) {
+        if (c.getId() == null) {
+            return categoryRepository.save(c);
         } else {
-            Optional<Category> tAux = categoryRepository.getCategory(t.getId());
+            Optional<Category> cAux = categoryRepository.getCategory(c.getId());
             //if (tAux.isEmpty ()) { //isEmpty no existe
-            if (tAux.isPresent()) {
-                return categoryRepository.save(t);
+            if (cAux.isPresent()) {
+                return categoryRepository.save(c);
             } else {
-                return t;
+                return c;
             }
         }
+    }
+
+    public Category update(Category c) {
+        if (c.getId() != null) {
+            Optional<Category> cAux = categoryRepository.getCategory(c.getId());
+            if (!cAux.isEmpty()) {
+                if (c.getDescription() != null) {
+                    cAux.get().setDescription(c.getDescription());
+                }
+                if (c.getName() != null) {
+                    cAux.get().setName(c.getName());
+                }
+                return categoryRepository.save(cAux.get());
+            }
+        }
+        return c;
+    }
+
+    public boolean delete(int categoryId) {
+        Boolean cAux = getCategory(categoryId).map(categoria -> {
+            categoryRepository.delete(category);
+            return true;
+        }).orElse(false);
+        return cAux;
     }
 }

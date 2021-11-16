@@ -1,7 +1,7 @@
 /*
 * Apliación alquiler de herrmientas 
 *  Clase Repositorio Reservation
-*/
+ */
 package co.usa.ciclo3.ciclo3.model.repository;
 
 import co.usa.ciclo3.ciclo3.model.Reservation;
@@ -17,19 +17,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReservationRepository {
 
- @Autowired
+    @Autowired
+    private ReservationCrudRepository reservationCrudRepository;
 
- private ReservationCrudRepository reservationCrudRepository;
+    public List<Reservation> getAll() {
+        return (List<Reservation>) reservationCrudRepository.findAll();
+    }
 
- public List<Reservation> getAll() {
-  return (List<Reservation>) reservationCrudRepository.findAll();
- }
+    public Optional<Reservation> getReservation(int id) {
+        return reservationCrudRepository.findById(id);
+    }
 
- public Optional<Reservation> getReservation(int id) {
-  return reservationCrudRepository.findById(id);
- }
+    public Reservation save(Reservation r) {
+        return reservationCrudRepository.save(r);
+    }
 
- public Reservation save(Reservation t) {
-  return reservationCrudRepository.save(t);
- }
+    public void delete(Reservation r) {
+        reservationCrudRepository.delete(r);
+    }
 }

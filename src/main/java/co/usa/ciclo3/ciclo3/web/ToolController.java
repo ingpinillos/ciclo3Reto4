@@ -11,9 +11,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,14 +39,26 @@ public class ToolController {
         return toolService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Tool> getTool(@PathVariable("id") int id) {
-        return toolService.getTool(id);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<Tool> getTool(@PathVariable("id") int id) {
+//        return toolService.getTool(id);
+//    }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Tool save(@RequestBody Tool t) {
         return toolService.save(t);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Tool update(@RequestBody Tool t) {
+        return toolService.update(t);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int id) {
+        return toolService.delete(id);
     }
 }

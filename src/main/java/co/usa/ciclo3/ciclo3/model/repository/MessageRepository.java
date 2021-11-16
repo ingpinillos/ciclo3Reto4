@@ -18,7 +18,6 @@ import org.springframework.stereotype.Repository;
 public class MessageRepository {
 
     @Autowired
-
     private MessageCrudRepository messageCrudRepository;
 
     public List<Message> getAll() {
@@ -29,7 +28,11 @@ public class MessageRepository {
         return messageCrudRepository.findById(id);
     }
 
-    public Message save(Message t) {
-        return messageCrudRepository.save(t);
+    public Message save(Message m) {
+        return messageCrudRepository.save(m);
+    }
+
+    public Message delete(Message m) {
+        return messageCrudRepository.save(m);
     }
 }
