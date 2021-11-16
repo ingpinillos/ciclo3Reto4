@@ -62,6 +62,6 @@ public class CategoryController {
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
-        return categoryService.delete(id);
+        return categoryService.deleteCategory(id);
     }
 }
