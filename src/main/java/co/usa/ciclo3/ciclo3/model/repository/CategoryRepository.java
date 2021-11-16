@@ -24,7 +24,7 @@ public class CategoryRepository {
         return (List<Category>) categoryCrudRepository.findAll();
     }
 
-    public Optional<Category> getTool(int id) {
+    public Optional<Category> getCategory(int id) {
         return categoryCrudRepository.findById(id);
     }
 
@@ -34,9 +34,5 @@ public class CategoryRepository {
 
     public void delete(Category c) {
         categoryCrudRepository.delete(c);
-    }
-
-    public Optional<Category> getCategory(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
